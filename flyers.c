@@ -6,7 +6,7 @@
 #include <time.h>
 
 boid **boidArray;
-int dawna = 0;
+
 void updateBoids(int n, boid **boidArray){
 	for(int i=0;i<n;i++){
 		boid *b = boidArray[i];
@@ -36,14 +36,11 @@ void updateBoids(int n, boid **boidArray){
 void keyPressed (unsigned char key, int x, int y) {  
 	if(key == 'q'){
 		printf("dawnaballz\n");
-		// exit(0);
-		dawna = 1;
+		exit(0);
 	}
 }
 void display(){
-	if(dawna == 1){
-		// glClear(GL_COLOR_BUFFER_BIT);
-	glClearColor(0.941, 0.973, 1,1);
+	glClear(GL_COLOR_BUFFER_BIT);
 	// glColor3ub(rand()%255, rand()%255, rand()%255 );
 	// glBegin(GL_POLYGON);
 	// glVertex3f(500,500,0);
@@ -53,8 +50,6 @@ void display(){
 	// glEnd();
 	updateBoids(100, boidArray);
 	glFlush();
-	}
-	
 }
 
 int main(int argc, char *argv[])
@@ -62,7 +57,7 @@ int main(int argc, char *argv[])
 	srand(time(NULL));
 	boidArray = malloc(100*sizeof(boid));
 	for(int i=0;i<200;i++){
-		boidArray[i] = newBoid(rand()%2000,rand()%2000,rand()%40-20,rand()%40-20, 20+rand()%100, 140+rand()%80, 32+rand()%60);
+		boidArray[i] = newBoid(rand()%2000,rand()%2000,rand()%40-20,rand()%40-20, rand()%255, rand()%255, rand()%255);
 	}
 
 
@@ -71,7 +66,7 @@ int main(int argc, char *argv[])
     glutInitWindowSize(1000, 1000);
 	glutInitWindowPosition(0, 0);
     glutCreateWindow("Dawna Linsdell");
-    glClearColor(0.941, 0.973, 1,1);
+    glClearColor(1.0, 1.0, 1.0, 1.0);
     glPointSize(3);
     glOrtho(0.f, 2000.f, 0, 2000.f, 0.f, 1.f );
     glutKeyboardFunc(keyPressed);
